@@ -728,6 +728,7 @@ GtkWidget *create_HelpWindow (const char *text)
 	GtkWidget *vbox1;
 	GtkWidget *help_text;
 	GtkWidget *HelpQuit;
+	GtkTextBuffer *help_buf;
 
 	HelpWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data (GTK_OBJECT (HelpWindow), "HelpWindow", HelpWindow);
@@ -740,10 +741,13 @@ GtkWidget *create_HelpWindow (const char *text)
 	gtk_widget_show (vbox1);
 	gtk_container_add (GTK_CONTAINER (HelpWindow), vbox1);
 
-	help_text = gtk_text_new (NULL, NULL);
-	gtk_text_set_word_wrap( GTK_TEXT( help_text ), TRUE);
-	gtk_text_set_line_wrap( GTK_TEXT( help_text ), TRUE);
-
+	help_text = gtk_text_view_new ();
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (help_text), GTK_WRAP_WORD);
+	
+	help_buf = gtk_text_buffer_new (NULL);
+	gtk_text_buffer_insert_at_cursor (help_buf, text, -1);
+	gtk_text_view_set_buffer (GTK_TEXT_VIEW (help_text), help_buf);
+	g_object_unref (help_buf);
 
 	gtk_object_set_data (GTK_OBJECT (HelpWindow), "help_text", help_text);
 	gtk_widget_show (help_text);
@@ -751,7 +755,7 @@ GtkWidget *create_HelpWindow (const char *text)
 //	gtk_widget_set_sensitive (help_text, FALSE);
 	GTK_WIDGET_UNSET_FLAGS (help_text, GTK_CAN_FOCUS);
 	gtk_widget_realize (help_text);
-	gtk_text_insert (GTK_TEXT (help_text), NULL, NULL, NULL, text, strlen(text));
+	
 
 	HelpQuit = gtk_button_new_with_label ("Close");
 	gtk_object_set_data (GTK_OBJECT (HelpWindow), "HelpQuit", HelpQuit);

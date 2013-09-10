@@ -1,9 +1,9 @@
 
-CC = gcc
-CFLAGS = -g
+CC ?= gcc
+CFLAGS ?= -g
 #CFLAGS = -g -DDEBUG
 
-PREFIX = /usr
+PREFIX ?= /usr
 PUBLIC_SEQUENCES = $(PREFIX)/share/AutoZen
 
 # uncomment one of the OS= lines below if you're compiling on one of those OSen. 
@@ -19,7 +19,7 @@ strip: autozen seq2wav
 	strip autozen seq2wav
 
 autozen: autozen.c *.xpm
-	$(CC) $(OS) -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' $(CFLAGS) `gtk-config --cflags` `gtk-config  --libs` -pthread autozen.c -o autozen $(DEBUG_LIBS)
+	$(CC) $(OS) -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' $(CFLAGS) `pkg-config --cflags gtk+-2.0` autozen.c -o autozen `pkg-config --libs gtk+-2.0`
 
 seq2wav: seq2wav.c
 	$(CC) seq2wav.c -o seq2wav -lm
