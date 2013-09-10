@@ -19,6 +19,7 @@
 #include <sys/stat.h>
 #include <pthread.h>
 #include <gtk/gtk.h>
+#include <portaudio.h>
 
 
 /* Messy, but should manage to include the OSS
@@ -113,7 +114,7 @@ char bQuit=0;
 //
 /////////////////////////////////
 
-#define SAMPLE_RATE 8000
+#define SAMPLE_RATE 44100
 
 #define MAX_HARMONICS 10
 #define DEFAULT_HARMONICS 3
@@ -429,48 +430,6 @@ double Current=0;
 	return(1);
 }	// end InitWaveTable
 
-int SoundBytesWritten(int audio_fd)
-{
-count_info info;
-
-	ioctl(audio_fd, SNDCTL_DSP_GETOPTR, &info);
-
-	return(info.bytes);
-}
-
-int SetStereo(int dsp,char Stereo)
-{
-int stereo = Stereo;     /* 0=mono, 1=stereo */
-
-	if (ioctl(dsp, SNDCTL_DSP_STEREO, &stereo)==-1) { /* Fatal error */
-		perror("SNDCTL_DSP_STEREO");
-		return(0);
-	}
-
-	if (stereo != 1) {
-		printf("\aNo sterio support\n");
-		printf("Stereo support is REQUIRED for this to work!\n");
-		return(0);
-		// The device doesn't support stereo mode.
-	}
-
-	return(1);
-}
-
-
-unsigned int SetSampleRate(int audio_fd, unsigned int rate)
-{
-unsigned int SampleRate = rate;
-	
-	if (ioctl(audio_fd, SNDCTL_DSP_SPEED, &SampleRate)==-1) { /* Fatal error */
-		perror("SNDCTL_DSP_SPEED");
-		return(FALSE);
-	}
-
-	return(SampleRate);	// this is the actual sample rate which SHOULD be near the input value!
-}	// end SetSampleRate
-
-
 void value_change_no_invert(GtkWidget *widget, gpointer data)
 {
 	*((double *)data) = GTK_ADJUSTMENT(widget) ->value;
@@ -618,52 +577,55 @@ gint ColorBoxTimeOut(gpointer data) {
 	
 void *SoundThread(void *v)
 {
-	int dsp;
-	int iCur;
-	int iCur2;
+	int32_t iCur[2];
 	int iCharIn;
 	unsigned int SampleRate;
 	int arg;
 	char quit=0;
 	int i,j;
+	PaStream *stream;
+	PaError err;
 
-
-	dsp = open("/dev/dsp",O_WRONLY);
-
-	if(dsp <0) 
-		fprintf(stderr,"Failed to open the sound card.\n");
-
-	// EXPERIMENTAL, shrink the buffer to improve response time!
-	arg = 0x00800004;
-	ioctl(dsp,SNDCTL_DSP_SETFRAGMENT,&arg);	// 128 16byte chunks. about 1/8 sec
-
-	if(!SetStereo(dsp,1))
-//		return((void *) -1);
-		printf("no stereo, might as well quit\n");
-
-	SampleRate = SetSampleRate(dsp,SAMPLE_RATE);
-
-	if(!SampleRate) {
-		fprintf(stderr,"ERROR:\aCannot set a sample rate\n");
-		SampleRate=8000;
-//		return(0);
+	err = Pa_Initialize ();
+	if (err != paNoError) {
+		fprintf (stderr, "PortAudio error: %s\n", Pa_GetErrorText (err));
+		return 0;
 	}
 
+	// EXPERIMENTAL, shrink the buffer to improve response time!
+	err = Pa_OpenDefaultStream (&stream,
+					0, /* no input channels */
+					2, /* stereo output */
+					paInt32, /* 32 bit floating point output */
+					SAMPLE_RATE,
+					0, /* frames per buffer, i.e. the number
+						of sample frames that PortAudio will
+						request from the callback. Many apps
+						may want to use
+						paFramesPerBufferUnspecified, which
+						tells PortAudio to pick the best,
+						possibly changing, buffer size.*/
+					NULL, NULL);
+
+
+	if (err != paNoError) {
+		fprintf (stderr, "PortAudio error: %s\n", Pa_GetErrorText (err));
+		return 0;
+	}
 	InitWaveTable(SampleRate);
 
 	curtime=curtime2=0;
 	
 	while(!bQuit) {
-		for(j=0;j<SAMPLE_RATE;j++) {
+		for(j=0;j<60*SAMPLE_RATE;j++) {
 
 			IncrementCurtimes(harmonic_curtimeL, nHarmonics, increment, 0.0);
 			IncrementCurtimes(harmonic_curtimeR, nHarmonics, increment, detune);
 
-			iCur = ComputeSummation(harmonic_curtimeL, nHarmonics, volume);
-			iCur2 = ComputeSummation(harmonic_curtimeR, nHarmonics, volume);
-
-			write(dsp,&iCur,1);	// left
-			write(dsp,&iCur2,1);	// right!
+			iCur[0] = ComputeSummation(harmonic_curtimeL, nHarmonics, volume);
+			iCur[1] = ComputeSummation(harmonic_curtimeR, nHarmonics, volume);
+			
+			Pa_WriteStream (stream, iCur, 1);
 
 			count++;	// bump the sample counter!
 		}
@@ -672,7 +634,9 @@ void *SoundThread(void *v)
 
 	}	// end while		
 
-return;
+	Pa_Terminate ();
+	
+	return NULL;
 }
 
 gint volTimeOut(gpointer data) {

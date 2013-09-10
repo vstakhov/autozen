@@ -19,7 +19,7 @@ strip: autozen seq2wav
 	strip autozen seq2wav
 
 autozen: autozen.c *.xpm
-	$(CC) -D__`uname`__ -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' $(CFLAGS) `pkg-config --cflags gtk+-2.0` autozen.c -o autozen `pkg-config --libs gtk+-2.0`
+	$(CC) -D__`uname`__ -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' $(CFLAGS) `pkg-config --cflags gtk+-2.0` autozen.c -o autozen `pkg-config --libs gtk+-2.0` -lportaudio
 
 seq2wav: seq2wav.c
 	$(CC) seq2wav.c -o seq2wav -lm
