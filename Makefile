@@ -27,17 +27,17 @@ clean:
 	rm -f autozen seq2wav
 
 install: all
-	install -d $(PREFIX)/bin
-	install zentime $(PREFIX)/bin
-	install -s seq2wav $(PREFIX)/bin
-	install -s autozen $(PREFIX)/bin
-	install -d $(PREFIX)/share/AutoZen
-	install -m 644 *.seq $(PREFIX)/share/AutoZen
-	install -d $(PREFIX)/share/doc/AutoZen/HTML/images
-	install -m 644 doc/HTML/*.html $(PREFIX)/share/doc/AutoZen/HTML
-	install -m 644 doc/HTML/images/* $(PREFIX)/share/doc/AutoZen/HTML/images
-	install -d $(PREFIX)/man/man1
-	install -m 644 doc/autozen.1 $(PREFIX)/man/man1
+	install -d $(DESTDIR)$(PREFIX)/bin
+	install zentime $(DESTDIR)$(PREFIX)/bin
+	install -s seq2wav $(DESTDIR)$(PREFIX)/bin
+	install -s autozen $(DESTDIR)$(PREFIX)/bin
+	install -d $(DESTDIR)$(PREFIX)/share/AutoZen
+	install -m 644 *.seq $(DESTDIR)$(PREFIX)/share/AutoZen
+	install -d $(DESTDIR)$(PREFIX)/share/doc/AutoZen/HTML/images
+	install -m 644 doc/HTML/*.html $(DESTDIR)$(PREFIX)/share/doc/AutoZen/HTML
+	install -m 644 doc/HTML/images/* $(DESTDIR)$(PREFIX)/share/doc/AutoZen/HTML/images
+	install -d $(DESTDIR)$(PREFIX)/man/man1
+	install -m 644 doc/autozen.1 $(DESTDIR)$(PREFIX)/man/man1
 
 tags: *.[ch] *.xpm
 	ctags *.[ch] *.xpm
