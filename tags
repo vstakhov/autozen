@@ -1,0 +1,137 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/darren@hiebert.com/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://home.hiwaay.net/~darren/ctags	/official site/
+!_TAG_PROGRAM_VERSION	2.0.3	/with C++ support/
+BEAT_MAX	autozen.c	121;"	d	file:
+BaseFreq	autozen.c	/^GtkWidget *BaseFreq;$/;"	v
+BeatFreq	autozen.c	/^GtkWidget *BeatFreq;$/;"	v
+COLORBOX_X	autozen.c	75;"	d	file:
+COLORBOX_Y	autozen.c	76;"	d	file:
+CheckSequencer	autozen.c	/^int CheckSequencer()$/;"	f
+ClockTime	autozen.c	/^GtkWidget *ClockTime;$/;"	v
+ColorBox	autozen.c	/^GtkWidget *ColorBox;$/;"	v
+ColorBoxDestroy	autozen.c	/^void ColorBoxDestroy(GtkWidget *widget, gpointer data)$/;"	f
+ColorBoxTOhandle	autozen.c	/^gint ColorBoxTOhandle;$/;"	v
+ColorBoxTimeOut	autozen.c	/^gint ColorBoxTimeOut(gpointer data) {$/;"	f
+ColorBoxX	autozen.c	/^int ColorBoxX = 0;$/;"	v
+ColorBoxX	autozen.c	/^int ColorBoxX = COLORBOX_X;$/;"	v
+ColorBoxY	autozen.c	/^int ColorBoxY = 0;$/;"	v
+ColorBoxY	autozen.c	/^int ColorBoxY = COLORBOX_Y;$/;"	v
+ColorBox_default_style	autozen.c	/^GtkStyle  *ColorBox_default_style, *ColorBox_new_style;$/;"	v
+ColorBox_new_color	autozen.c	/^GdkColor  ColorBox_new_color = {0, 0x8000, 0x0, 0x8000};$/;"	v
+ColorBox_new_style	autozen.c	/^GtkStyle  *ColorBox_default_style, *ColorBox_new_style;$/;"	v
+ComputeSummation	autozen.c	/^int ComputeSummation(double timeval[], int harmonics, double Volume)$/;"	f
+ComputeSummation	seq2wav.c	/^int ComputeSummation(double timeval[], int harmonics, double Volume)$/;"	f
+CreateAutoZen	autozen.c	/^GtkWidget *CreateAutoZen(GtkWidget *window)$/;"	f
+CreateColorBox	autozen.c	/^GtkWidget *CreateColorBox()$/;"	f
+DEFAULT_HARMONICS	autozen.c	119;"	d	file:
+DEFAULT_HARMONICS	seq2wav.c	57;"	d	file:
+EndSeconds	autozen.c	/^volatile int EndSeconds=0;	\/* number of seconds when the current instruction expires *\/$/;"	v
+FreqTime	autozen.c	/^GtkWidget *FreqTime;$/;"	v
+GenerateSamples	seq2wav.c	/^long int GenerateSamples(double frequency, double beat, int tenth_seconds, FILE *Output)$/;"	f
+Help	autozen.c	/^void Help(GtkWidget *widget, gpointer data)$/;"	f
+IncrementCurtimes	autozen.c	/^void IncrementCurtimes(double timeval[], int harmonics, double increment, double detune)$/;"	f
+IncrementCurtimes	seq2wav.c	/^void IncrementCurtimes(double timeval[], int harmonics, double increment, double detune)$/;"	f
+InitHeaderConstants	seq2wav.c	/^void InitHeaderConstants(void)$/;"	f
+InitSequencer	autozen.c	/^int InitSequencer(const char *fname)$/;"	f
+InitWaveTable	autozen.c	/^int InitWaveTable(unsigned int SampleRate)$/;"	f
+InitWaveTable	seq2wav.c	/^int InitWaveTable(unsigned int SampleRate)$/;"	f
+LastSeconds	autozen.c	/^int LastSeconds;$/;"	v
+MAX_HARMONICS	autozen.c	118;"	d	file:
+MAX_HARMONICS	seq2wav.c	56;"	d	file:
+PauseBit	autozen.c	/^GdkBitmap *PauseBit;$/;"	v
+PausePix	autozen.c	/^GdkPixmap *PausePix;$/;"	v
+PausedBit	autozen.c	/^GdkBitmap *PausedBit;$/;"	v
+PausedPix	autozen.c	/^GdkPixmap *PausedPix;$/;"	v
+PhaseDifference	autozen.c	/^double PhaseDifference(double CurtimeL[], double CurtimeR[])$/;"	f
+PhaseLabel	autozen.c	/^GtkWidget *PhaseLabel;$/;"	v
+Play	autozen.c	/^void Play (GtkWidget *widget, gpointer data)$/;"	f
+PlayBit	autozen.c	/^GdkBitmap *PlayBit;$/;"	v
+PlayPix	autozen.c	/^GdkPixmap *PlayPix;$/;"	v
+PlayPixWid	autozen.c	/^GtkWidget *PlayPixWid;$/;"	v
+PrintHandler	autozen.c	/^void PrintHandler(const char *line) $/;"	f
+Quit	autozen.c	/^void Quit (GtkWidget *widget, gpointer data)$/;"	f
+RunSequence	seq2wav.c	/^unsigned long int RunSequence(FILE *Sequence, FILE *Out)$/;"	f
+SAMPLE_RATE	autozen.c	116;"	d	file:
+SAMPLE_RATE	seq2wav.c	54;"	d	file:
+SetColorBox	autozen.c	/^void SetColorBox(double phase)$/;"	f
+SetPause	autozen.c	/^void SetPause(void) $/;"	f
+SetSampleRate	autozen.c	/^unsigned int SetSampleRate(int audio_fd, unsigned int rate)$/;"	f
+SetStereo	autozen.c	/^int SetStereo(int dsp,char Stereo)$/;"	f
+SetupSequenceDirs	autozen.c	/^void SetupSequenceDirs(void)$/;"	f
+SoundBytesWritten	autozen.c	/^int SoundBytesWritten(int audio_fd)$/;"	f
+SoundThread	autozen.c	/^void *SoundThread(void *v)$/;"	f
+Starting	autozen.c	/^char Starting=1;$/;"	v
+StopSequencer	autozen.c	/^int StopSequencer(void)$/;"	f
+Stopping	autozen.c	/^char Stopping=0;$/;"	v
+TimeOut	autozen.c	/^gint TimeOut(gpointer data)$/;"	f
+VolLabel	autozen.c	/^GtkWidget *VolLabel;$/;"	v
+VolumeDelta	autozen.c	/^double VolumeDelta=0.5;$/;"	v
+VolumeTarget	autozen.c	/^double VolumeTarget=50.0;$/;"	v
+WaveTable	autozen.c	/^int *WaveTable;$/;"	v
+WaveTable	seq2wav.c	/^int *WaveTable;$/;"	v
+ZERO_CROSSING	seq2wav.c	59;"	d	file:
+adj_base	autozen.c	/^GtkObject *adj_base;$/;"	v
+adj_beat	autozen.c	/^GtkObject *adj_beat;$/;"	v
+adj_colorboxphase	autozen.c	/^GtkObject *adj_colorboxphase;$/;"	v
+adj_vol	autozen.c	/^GtkObject *adj_vol;$/;"	v
+bQuit	autozen.c	/^char bQuit=0;$/;"	v
+count	autozen.c	/^int count=0;$/;"	v
+count	seq2wav.c	/^int count=0;$/;"	v
+create_HelpWindow	autozen.c	/^GtkWidget *create_HelpWindow (const char *text)$/;"	f
+curtime	autozen.c	/^double curtime;$/;"	v
+curtime	seq2wav.c	/^double curtime;$/;"	v
+curtime2	autozen.c	/^double curtime2;$/;"	v
+curtime2	seq2wav.c	/^double curtime2;$/;"	v
+curval	autozen.c	/^double curval;$/;"	v
+curval	seq2wav.c	/^double curval;$/;"	v
+dBeatIncrement	autozen.c	/^double dBeatIncrement;$/;"	v
+dBeatIncrement	seq2wav.c	/^double dBeatIncrement;$/;"	v
+delete_event	autozen.c	/^gint delete_event(GtkWidget *widget, GdkEvent *event, gpointer data)$/;"	f
+destroy	autozen.c	/^void destroy (GtkWidget *widget, gpointer data)$/;"	f
+detune	autozen.c	/^volatile double detune=10.0;$/;"	v
+detune	seq2wav.c	/^double detune=10.0;$/;"	v
+fSequence	autozen.c	/^FILE *fSequence=NULL;$/;"	v
+fSequence	seq2wav.c	/^FILE *fSequence=NULL;$/;"	v
+file_ok_sel	autozen.c	/^void file_ok_sel (GtkWidget *w, GtkFileSelection *fs)$/;"	f
+harmonic_curtimeL	autozen.c	/^double harmonic_curtimeL[MAX_HARMONICS];$/;"	v
+harmonic_curtimeL	seq2wav.c	/^double harmonic_curtimeL[MAX_HARMONICS];$/;"	v
+harmonic_curtimeR	autozen.c	/^double harmonic_curtimeR[MAX_HARMONICS];$/;"	v
+harmonic_curtimeR	seq2wav.c	/^double harmonic_curtimeR[MAX_HARMONICS];$/;"	v
+increment	autozen.c	/^volatile double increment=300;$/;"	v
+increment	seq2wav.c	/^double increment=300;$/;"	v
+label_change_value	autozen.c	/^void label_change_value(GtkWidget *widget, gpointer label)$/;"	f
+lila	lila.xpm	/^static char * lila[] = {$/;"	v	file:
+main	autozen.c	/^int main (int argc, char *argv[])$/;"	f
+main	seq2wav.c	/^int main (int argc, char *argv[])$/;"	f
+nHarmonics	autozen.c	/^int nHarmonics = DEFAULT_HARMONICS;$/;"	v
+nHarmonics	seq2wav.c	/^int nHarmonics = DEFAULT_HARMONICS;$/;"	v
+paused	autozen.c	/^char paused=0;$/;"	v
+phase	autozen.c	/^volatile double phase = 0.0;$/;"	v
+playing	autozen.c	/^volatile char playing=0;$/;"	v
+playname	autozen.c	/^char *playname = NULL;$/;"	v
+scale_base	autozen.c	/^GtkWidget *scale_base;$/;"	v
+scale_beat	autozen.c	/^GtkWidget *scale_beat;$/;"	v
+scale_colorboxphase	autozen.c	/^GtkWidget *scale_colorboxphase;$/;"	v
+seconds	autozen.c	/^volatile int seconds=0;$/;"	v
+seconds	seq2wav.c	/^volatile int seconds=0;$/;"	v
+szInstruction	autozen.c	/^char szInstruction[1024];$/;"	v
+szInstruction	seq2wav.c	/^char szInstruction[1024];$/;"	v
+target	autozen.c	/^double target;$/;"	v
+target	seq2wav.c	/^double target;$/;"	v
+tmptime	autozen.c	/^char tmptime[7] = "00:00";$/;"	v
+value_change	autozen.c	/^void value_change(GtkWidget *widget, gpointer data)$/;"	f
+value_change_no_invert	autozen.c	/^void value_change_no_invert(GtkWidget *widget, gpointer data)$/;"	f
+volTOhandle	autozen.c	/^gint volTOhandle;$/;"	v
+volTimeOut	autozen.c	/^gint volTimeOut(gpointer data) {$/;"	f
+volume	autozen.c	/^volatile double volume = 0.0;$/;"	v
+volume	seq2wav.c	/^double volume = 50.0;$/;"	v
+wav_header	seq2wav.c	/^} 	__attribute__ ((packed)) wav_header;$/;"	t	file:
+wh	seq2wav.c	/^wav_header wh;$/;"	v
+xpm_pause	pause.xpm	/^static char * xpm_pause[] = {$/;"	v	file:
+xpm_paused	paused.xpm	/^static char * xpm_paused[] = {$/;"	v	file:
+xpm_play	play.xpm	/^static const char *xpm_play[] = {$/;"	v	file:
+xpm_record	record.xpm	/^static const char *xpm_record[] = {$/;"	v	file:
+xpm_stop	stop.xpm	/^static const char *xpm_stop[] = {$/;"	v	file:

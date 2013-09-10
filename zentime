@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+
+while (<>) {
+	m/^(\S+)\s+(\S+)(.*)/;
+
+	next if($1 ne 'FADE' and $1 ne 'SLIDE' and $1 ne 'HOLD');
+
+	if($1 eq 'HOLD') {
+		$time = $2;
+	} else {
+		$time = $3;
+	}
+
+	$total += $time;
+}
+
+$hour = int($total / 3600);
+$total = $total % 3600;
+$min = int($total / 60);
+$sec = $total % 60;
+
+print "$hour:$min:$sec\n";

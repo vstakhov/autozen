@@ -1,0 +1,2 @@
+?package(autozen):needs=X11 section=Apps/Sound\
+  title="AutoZen" command="/usr/bin/autozen"

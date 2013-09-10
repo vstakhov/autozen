@@ -1,0 +1,14 @@
+Source: autozen
+Section: x11
+Priority: optional
+Maintainer: Steven James <pyro@linuxlabs.com>
+Build-depends: libgtk1.2-dev
+Standards-Version: 3.1.1
+
+Package: autozen
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Alter your state of consciousness
+ A software 'brain machine' for linux. AutoZen generates sound
+ and color designed to entrain your brain to a selected target
+ frequency and corresponding state of consciousness.

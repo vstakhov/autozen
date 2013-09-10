@@ -1,0 +1,5 @@
+For Linux, just make.
+
+For *BSD, edit Makefile. Uncomment one of the OS= lines at the top. Now, make.
+I don't have a *BSD system, so I am taking this on faith.
+

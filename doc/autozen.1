@@ -1,0 +1,60 @@
+.TH AutoZen 1
+.\" NAME should be all caps, SECTION should be 1-8, maybe w/ subsection
+.\" other parms are allowed: see man(7), man(1)
+.SH NAME
+AutoZen \-  experience an altered state of consciousness.
+.SH SYNOPSIS
+.BI "autozen [ -h] [-colorbox [ "  "x y" " ]] [-harmonics " n " ] [ " sequence\  ]
+.br
+.BI seq2wav " sequence outfile"
+.br
+.BI zentime \ sequence
+.SH "WARNING:"
+.BR "AutoZen is not recommended for anyone with a seizure disorder or who is under psychiatric care. "
+.br
+.BR "In particular, epileptics should avoid the colorbox option."
+.SH "DESCRIPTION"
+This manual page documents briefly the
+.BR autozen ,
+.BR seq2wav, and
+.B zentime
+commands.
+Full documentation is available at 
+.B http://www.linuxlabs.com/autozen.html
+or
+.B /usr/share/doc/AutoZen
+in HTML format.
+.PP
+.B AutoZen 
+is a software 'brain machine' for Linux. It generates sounds and colors that are meant to cause the brain to temporarily shift to a different dominant frequency and cause the user to experience an altered state of consciousness. It is similar to the devices seen in the 'Sharper Image' catalog and in magazine ads, but the price is a lot more attractive!
+.TP
+.B autozen
+interactively generates color and sound to cause your brain to operate at a chosen target frequency.
+It may also "play" a sequence file directly to the sound card (with accompanying colorbox).
+.TP
+.B seq2wav
+generates a wav file ready for burning to audio cd from an autozen sequence file.
+.br
+.B NOTE:
+most (but not all) cd players will play these CDs. Successful CD mastering is left as an exercise for the reader.
+.TP
+.B zentime
+examimes a sequence file and outputs the total time for the sequence
+.SH OPTIONS
+.TP
+.B \-h
+Show summary of options.
+.TP
+.B \-colorbox [<x> <y>]
+In addition to sound, create a colorbox window with a flashing red/green background.
+If <x> and <y> are supplied, make the window that size in pixels.
+.TP
+.B \-harmonics <n>
+Generated sound should contain <n> harmonics (counting the fundamental). Default is 3.
+.TP
+.B sequence
+is a simple text based control file for AutoZen (see full documentation for details).
+.SH BUGS
+This man page could use improvement.
+.SH AUTHOR
+This manual page was written by Steven James <pyro@linuxlabs.com>.
