@@ -19,26 +19,13 @@
 #include <sys/stat.h>
 #include <pthread.h>
 #include <gtk/gtk.h>
-#include <portaudio.h>
+#include <ao/ao.h>
 
 
 /* Messy, but should manage to include the OSS
 	Headers for Linux and the various *BSDs
 	+ Solaris. Thanks to Trevor Johnson for this */
  
-/* "The nice thing about standards..." */
-#if defined (__FreeBSD__)
-#include <machine/soundcard.h>
-#else
-#if defined (__NetBSD__) || defined (__OpenBSD__)
-#include <soundcard.h>          /* OSS emulation */
-#undef ioctl
-#else
-/* BSDI, Linux, Solaris */
-#include <sys/soundcard.h>
-#endif                          /* __NetBSD__ or __OpenBSD__ */
-#endif                          /* __FreeBSD__ */
-
 //#define DEBUG
 /////////////////////////////////////////////////////////////////////////
 //
@@ -578,63 +565,64 @@ gint ColorBoxTimeOut(gpointer data) {
 void *SoundThread(void *v)
 {
 	int32_t iCur[2];
+	char *buf;
 	int iCharIn;
 	unsigned int SampleRate;
-	int arg;
+	int arg, buflen;
 	char quit=0;
-	int i,j;
-	PaStream *stream;
-	PaError err;
+	int i,j, drid;
+	ao_device *stream;
+	ao_sample_format fmt = {
+		.bits = 16,
+		.rate = SAMPLE_RATE,
+		.channels = 2,
+		.byte_format = AO_FMT_NATIVE,
+		.matrix = "L,R"
+	};
+	
+	ao_initialize ();
+	drid = ao_default_driver_id ();
 
-	err = Pa_Initialize ();
-	if (err != paNoError) {
-		fprintf (stderr, "PortAudio error: %s\n", Pa_GetErrorText (err));
+	if (drid == -1) {
+		fprintf (stderr, "libao error: cannot open driver\n");
 		return 0;
 	}
 
+	
+	stream = ao_open_live (drid, &fmt, NULL);
 	// EXPERIMENTAL, shrink the buffer to improve response time!
-	err = Pa_OpenDefaultStream (&stream,
-					0, /* no input channels */
-					2, /* stereo output */
-					paInt32, /* 32 bit floating point output */
-					SAMPLE_RATE,
-					0, /* frames per buffer, i.e. the number
-						of sample frames that PortAudio will
-						request from the callback. Many apps
-						may want to use
-						paFramesPerBufferUnspecified, which
-						tells PortAudio to pick the best,
-						possibly changing, buffer size.*/
-					NULL, NULL);
-
-
-	if (err != paNoError) {
-		fprintf (stderr, "PortAudio error: %s\n", Pa_GetErrorText (err));
+	if (stream == NULL) {
+		fprintf (stderr, "libao error: cannot open live stream\n");
 		return 0;
 	}
 	InitWaveTable(SampleRate);
 
 	curtime=curtime2=0;
+	buflen = fmt.bits/8 * fmt.channels * fmt.rate;
+	buf = calloc (buflen, sizeof(char));
 	
 	while(!bQuit) {
-		for(j=0;j<60*SAMPLE_RATE;j++) {
+		for(j=0;j<SAMPLE_RATE;j++) {
 
 			IncrementCurtimes(harmonic_curtimeL, nHarmonics, increment, 0.0);
 			IncrementCurtimes(harmonic_curtimeR, nHarmonics, increment, detune);
 
 			iCur[0] = ComputeSummation(harmonic_curtimeL, nHarmonics, volume);
 			iCur[1] = ComputeSummation(harmonic_curtimeR, nHarmonics, volume);
-			
-			Pa_WriteStream (stream, iCur, 1);
+						
+			buf[4*i] = buf[4*i+2] = iCur[0];
+			buf[4*i+1] = buf[4*i+3] = iCur[1];
 
 			count++;	// bump the sample counter!
 		}
+		ao_play (stream, buf, buflen);
 
 		seconds++;
 
 	}	// end while		
 
-	Pa_Terminate ();
+	ao_close (stream);
+	ao_shutdown ();
 	
 	return NULL;
 }
